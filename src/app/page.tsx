@@ -8,11 +8,12 @@ import FilterComponent, { ViewMode, SortMode } from '@/components/FilterComponen
 import { useState } from 'react';
 
 const categories = [
-  { id: 1, name: "교육/학습", iconName: "BookOpen" },
-  { id: 2, name: "비즈니스/커리어", iconName: "Briefcase" },
-  { id: 3, name: "취미/라이프", iconName: "Heart" },
-  { id: 4, name: "건강/웰빙", iconName: "Activity" },
-  { id: 5, name: "기술/과학", iconName: "Laptop" },
+  { id: 1, name: "교육", iconName: "BookOpen", jobs: ["Friendly Teacher", "Study Buddy", "Language Tutor", "Math Wizard", "Science Guru", "History Expert", "Writing Coach", "Music Teacher"] },
+  { id: 2, name: "커리어/비즈니스", iconName: "Briefcase", jobs: ["Career Guide", "Business Advisor", "Personal Assistant", "Tech Expert"] },
+  { id: 3, name: "예술/창작", iconName: "Palette", jobs: ["Creative Artist", "Fashion Stylist", "DIY Expert"] },
+  { id: 4, name: "건강/웰빙", iconName: "Heart", jobs: ["Fitness Trainer", "Wellness Coach", "Life Coach", "Life Advisor"] },
+  { id: 5, name: "취미/여가", iconName: "Coffee", jobs: ["Book Club Host", "Gaming Buddy", "Travel Guide", "Cooking Mentor"] },
+  { id: 6, name: "멘토링", iconName: "Users", jobs: ["Wise Mentor"] },
 ];
 
 export default function Home() {
@@ -62,12 +63,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between max-w-7xl mx-auto px-4 mt-8">
-        <div className="flex-1 max-w-xl">
-          <SearchComponent categories={categories} onSearch={setSearchQuery} />
-        </div>
-        <div className="ml-4">
-          <FilterComponent onViewChange={setViewMode} onSortChange={setSortMode} />
+      <div className="flex items-center justify-center max-w-7xl mx-auto px-4 mt-8">
+        <div className="flex items-center w-full max-w-2xl">
+          <div className="flex-1">
+            <SearchComponent categories={categories} onSearch={setSearchQuery} />
+          </div>
+          <div className="ml-2">
+            <FilterComponent onViewChange={setViewMode} onSortChange={setSortMode} />
+          </div>
         </div>
       </div>
 
