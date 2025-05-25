@@ -1,18 +1,25 @@
 'use client';
 
 import { useState } from 'react';
-import { Search } from 'lucide-react';
-import { characters } from '@/data/characters';
+import { Search, BookOpen, Briefcase, Heart, Activity, Laptop } from 'lucide-react';
 
 interface Category {
   id: number;
   name: string;
-  icon: any; // Using any for simplicity, but you might want to type this properly
+  iconName: string;
 }
 
 interface SearchComponentProps {
   categories: Category[];
 }
+
+const iconMap = {
+  'BookOpen': BookOpen,
+  'Briefcase': Briefcase,
+  'Heart': Heart,
+  'Activity': Activity,
+  'Laptop': Laptop,
+};
 
 export default function SearchComponent({ categories }: SearchComponentProps) {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -46,7 +53,7 @@ export default function SearchComponent({ categories }: SearchComponentProps) {
           <div className="absolute top-full left-0 right-0 bg-white mt-2 rounded-xl shadow-lg border border-gray-100 p-2 z-10">
             <div className="flex flex-wrap gap-1.5">
               {categories.map((category) => {
-                const Icon = category.icon;
+                const Icon = iconMap[category.iconName as keyof typeof iconMap];
                 return (
                   <button
                     key={category.id}

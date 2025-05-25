@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Search, BookOpen, Briefcase, Heart, Activity, Laptop } from 'lucide-react';
 import { characters } from '@/data/characters';
 import SearchComponent from '@/components/SearchComponent';
 
 const categories = [
-  { id: 1, name: "교육/학습", icon: BookOpen },
-  { id: 2, name: "비즈니스/커리어", icon: Briefcase },
-  { id: 3, name: "취미/라이프", icon: Heart },
-  { id: 4, name: "건강/웰빙", icon: Activity },
-  { id: 5, name: "기술/과학", icon: Laptop },
+  { id: 1, name: "교육/학습", iconName: "BookOpen" },
+  { id: 2, name: "비즈니스/커리어", iconName: "Briefcase" },
+  { id: 3, name: "취미/라이프", iconName: "Heart" },
+  { id: 4, name: "건강/웰빙", iconName: "Activity" },
+  { id: 5, name: "기술/과학", iconName: "Laptop" },
 ];
 
 export default function Home() {
