@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 import AppleProvider from 'next-auth/providers/apple';
+import { DefaultSession } from 'next-auth';
 
 // Extend the built-in session type
 declare module 'next-auth' {
