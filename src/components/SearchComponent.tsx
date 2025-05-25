@@ -45,6 +45,12 @@ export default function SearchComponent({ categories, onSearch }: SearchComponen
     setIsDropdownOpen(true);
   };
 
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    onSearch('');
+    setIsDropdownOpen(false);
+  };
+
   const handleCategoryClick = (category: Category) => {
     setSearchQuery('');
     onSearch(category.name);
@@ -62,6 +68,20 @@ export default function SearchComponent({ categories, onSearch }: SearchComponen
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+          {searchQuery && (
+            <button
+              onClick={handleClearSearch}
+              className="p-1 mr-1 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <Image
+                src="/x.svg"
+                alt="Clear search"
+                width={16}
+                height={16}
+                className="text-gray-400"
+              />
+            </button>
+          )}
           <Image
             src="/search.svg"
             alt="Search"
