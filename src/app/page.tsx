@@ -104,7 +104,7 @@ export default function Home() {
                   />
                 </div>
                 <div className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
-                  <h2 className={`text-lg font-semibold ${viewMode === 'list' ? 'text-left' : 'text-center'}`}>
+                  <h2 className={`text-lg font-semibold ${viewMode === 'list' ? 'text-left' : 'text-center'} text-gray-900`}>
                     {character.name}
                   </h2>
                   <p className={`text-sm text-gray-500 ${viewMode === 'list' ? 'text-left mt-1' : 'text-center mt-1'}`}>

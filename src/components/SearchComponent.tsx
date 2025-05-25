@@ -96,7 +96,7 @@ export default function SearchComponent({ categories, onSearch }: SearchComponen
                     }}
                     className="w-full px-4 py-2 text-left hover:bg-gray-100"
                   >
-                    <div className="text-sm font-medium">{character.name}</div>
+                    <div className="text-sm font-medium text-gray-900">{character.name}</div>
                     <div className="text-xs text-gray-500">{character.job}</div>
                   </button>
                 ))}
