@@ -45,12 +45,12 @@ export default function ChatComponent({ character }: ChatComponentProps) {
       >
         <Image
           src="/arrow-left.svg"
-          alt="Go back"
           width={24}
           height={24}
-          className="text-current"
+          alt="Back"
+          className="w-6 h-6"
         />
-        <span>Go back</span>
+        <span>Back</span>
       </button>
 
       <div className="absolute inset-0 w-full h-full z-0">

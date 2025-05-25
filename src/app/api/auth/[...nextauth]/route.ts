@@ -1,4 +1,4 @@
-import NextAuth, { DefaultSession } from 'next-auth';
+import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 import AppleProvider from 'next-auth/providers/apple';
@@ -32,14 +32,15 @@ const handler = NextAuth({
   },
   callbacks: {
     async session({ session, token }) {
-      if (session.user && token) {
-        session.user.id = token.id as string;
-      }
       return session;
     },
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        return {
+          ...token,
+          accessToken: account.access_token,
+          userId: user.id,
+        };
       }
       return token;
     },
