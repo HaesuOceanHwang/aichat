@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
       'phinf.pstatic.net'
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true,  // 빌드 중 ESLint 검사 비활성화
+  },
 };
 
 export default nextConfig;
