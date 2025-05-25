@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { characters } from '@/app/page';
+import { characters } from '@/data/characters';
 import { useState } from 'react';
 import Image from 'next/image';
 
