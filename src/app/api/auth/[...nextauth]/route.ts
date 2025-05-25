@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import NaverProvider from 'next-auth/providers/naver';
+// import GoogleProvider from 'next-auth/providers/google';
+// import NaverProvider from 'next-auth/providers/naver';
 import AppleProvider from 'next-auth/providers/apple';
 import { DefaultSession } from 'next-auth';
 
@@ -15,14 +15,14 @@ declare module 'next-auth' {
 
 const handler = NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID || '',
-      clientSecret: process.env.GOOGLE_SECRET || '',
-    }),
-    NaverProvider({
-      clientId: process.env.NAVER_CLIENT_ID || '',
-      clientSecret: process.env.NAVER_CLIENT_SECRET || '',
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_ID || '',
+    //   clientSecret: process.env.GOOGLE_SECRET || '',
+    // }),
+    // NaverProvider({
+    //   clientId: process.env.NAVER_CLIENT_ID || '',
+    //   clientSecret: process.env.NAVER_CLIENT_SECRET || '',
+    // }),
     AppleProvider({
       clientId: process.env.APPLE_ID || '',
       clientSecret: process.env.APPLE_SECRET || '',
