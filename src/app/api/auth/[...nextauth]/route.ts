@@ -1,7 +1,16 @@
-import NextAuth from 'next-auth';
+import NextAuth, { DefaultSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 import AppleProvider from 'next-auth/providers/apple';
+
+// Extend the built-in session type
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id?: string;
+    } & DefaultSession['user']
+  }
+}
 
 const handler = NextAuth({
   providers: [
@@ -22,7 +31,10 @@ const handler = NextAuth({
     signIn: '/auth/signin',
   },
   callbacks: {
-    async session({ session }) {
+    async session({ session, token }) {
+      if (session.user && token) {
+        session.user.id = token.id as string;
+      }
       return session;
     },
     async jwt({ token, user }) {
