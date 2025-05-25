@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from 'react';
 import { Search, BookOpen, Briefcase, Heart, Activity, Laptop } from 'lucide-react';
+import { characters } from '@/data/characters';
 
 const categories = [
   { id: 1, name: "교육/학습", icon: BookOpen },
@@ -11,33 +12,6 @@ const categories = [
   { id: 3, name: "취미/라이프", icon: Heart },
   { id: 4, name: "건강/웰빙", icon: Activity },
   { id: 5, name: "기술/과학", icon: Laptop },
-];
-
-export const characters = [
-  { id: 1, name: "Emma Anderson", job: "Friendly Teacher", image: "/characters/1.jpeg" },
-  { id: 2, name: "Dr. Marcus Chen", job: "Wise Mentor", image: "/characters/2.jpeg" },
-  { id: 3, name: "Isabella Rivera", job: "Creative Artist", image: "/characters/3.jpeg" },
-  { id: 4, name: "Alex Thompson", job: "Tech Expert", image: "/characters/4.jpeg" },
-  { id: 5, name: "Sarah Mitchell", job: "Life Coach", image: "/characters/5.jpeg" },
-  { id: 6, name: "James Wilson", job: "Study Buddy", image: "/characters/6.avif" },
-  { id: 7, name: "Diana Park", job: "Career Guide", image: "/characters/7.jpeg" },
-  { id: 8, name: "Lucas Garcia", job: "Language Tutor", image: "/characters/8.jpeg" },
-  { id: 9, name: "Olivia Bennett", job: "Fitness Trainer", image: "/characters/9.jpeg" },
-  { id: 10, name: "Michael Lee", job: "Music Teacher", image: "/characters/10.jpeg" },
-  { id: 11, name: "Rachel Kim", job: "Science Guru", image: "/characters/11.jpeg" },
-  { id: 12, name: "David Zhang", job: "Math Wizard", image: "/characters/12.jpeg" },
-  { id: 13, name: "Sophie Turner", job: "History Expert", image: "/characters/13.jpeg" },
-  { id: 14, name: "Nathan Brooks", job: "Writing Coach", image: "/characters/14.jpeg" },
-  { id: 15, name: "Maya Patel", job: "Travel Guide", image: "/characters/15.jpeg" },
-  { id: 16, name: "Thomas Laurent", job: "Cooking Mentor", image: "/characters/16.jpeg" },
-  { id: 17, name: "Victoria Chang", job: "Business Advisor", image: "/characters/17.jpeg" },
-  { id: 18, name: "Sophia Martinez", job: "Fashion Stylist", image: "/characters/18.jpeg" },
-  { id: 19, name: "Benjamin Foster", job: "Wellness Coach", image: "/characters/19.jpeg" },
-  { id: 20, name: "Emily Clarke", job: "Book Club Host", image: "/characters/20.jpeg" },
-  { id: 21, name: "Ryan Cooper", job: "Gaming Buddy", image: "/characters/21.jpeg" },
-  { id: 22, name: "Hannah Morgan", job: "DIY Expert", image: "/characters/22.jpeg" },
-  { id: 23, name: "Daniel Kim", job: "Life Advisor", image: "/characters/23.jpg" },
-  { id: 24, name: "Grace Taylor", job: "Personal Assistant", image: "/characters/24.jpg" },
 ];
 
 export default function Home() {
