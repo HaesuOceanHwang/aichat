@@ -1,7 +1,10 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import { characters } from '@/data/characters';
 import SearchComponent from '@/components/SearchComponent';
+import { useState } from 'react';
 
 const categories = [
   { id: 1, name: "교육/학습", iconName: "BookOpen" },
@@ -12,6 +15,15 @@ const categories = [
 ];
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredCharacters = characters.filter(character =>
+    !searchQuery || (
+      character.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      character.job.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="relative text-center py-16 px-4 space-y-4 bg-white/30 backdrop-blur-sm overflow-hidden">
@@ -39,35 +51,37 @@ export default function Home() {
         </div>
       </div>
 
-      <SearchComponent categories={categories} />
+      <SearchComponent categories={categories} onSearch={setSearchQuery} />
 
       <div className="p-8 mt-8">
         <h2 className="text-2xl font-medium text-center mb-12 text-gray-700">대화 할 캐랙터를 선택하세요!!!</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {characters.map((character) => (
-            <Link
-              key={character.id}
-              href={`/chat/${character.id}`}
-              className="block group"
-            >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div className="relative w-full pt-[100%]">
-                  <Image
-                    src={character.image}
-                    alt={character.name}
-                    fill
-                    className="object-contain p-2"
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
+        {!searchQuery && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {characters.map((character) => (
+              <Link
+                key={character.id}
+                href={`/chat/${character.id}`}
+                className="block group"
+              >
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+                  <div className="relative w-full pt-[100%]">
+                    <Image
+                      src={character.image}
+                      alt={character.name}
+                      fill
+                      className="object-contain p-2"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h2 className="text-lg font-semibold text-center">{character.name}</h2>
+                    <p className="text-sm text-gray-500 text-center mt-1">{character.job}</p>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold text-center">{character.name}</h2>
-                  <p className="text-sm text-gray-500 text-center mt-1">{character.job}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
