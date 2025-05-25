@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { characters } from '@/data/characters';
 import SearchComponent from '@/components/SearchComponent';
+import FilterComponent, { ViewMode, SortMode } from '@/components/FilterComponent';
 import { useState } from 'react';
 
 const categories = [
@@ -16,13 +17,23 @@ const categories = [
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [viewMode, setViewMode] = useState<ViewMode>('grid');
+  const [sortMode, setSortMode] = useState<SortMode>('name');
 
-  const filteredCharacters = characters.filter(character =>
-    !searchQuery || (
-      character.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      character.job.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredAndSortedCharacters = characters
+    .filter(character =>
+      !searchQuery || (
+        character.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        character.job.toLowerCase().includes(searchQuery.toLowerCase())
+      )
     )
-  );
+    .sort((a, b) => {
+      if (sortMode === 'name') {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.job.localeCompare(b.job);
+      }
+    });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -51,19 +62,36 @@ export default function Home() {
         </div>
       </div>
 
-      <SearchComponent categories={categories} onSearch={setSearchQuery} />
+      <div className="flex items-center justify-between max-w-7xl mx-auto px-4 mt-8">
+        <div className="flex-1 max-w-xl">
+          <SearchComponent categories={categories} onSearch={setSearchQuery} />
+        </div>
+        <div className="ml-4">
+          <FilterComponent onViewChange={setViewMode} onSortChange={setSortMode} />
+        </div>
+      </div>
 
       <div className="p-8 mt-8">
         <h2 className="text-2xl font-medium text-center mb-12 text-gray-700">대화 할 캐랙터를 선택하세요!!!</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {filteredCharacters.map((character) => (
+        <div className={`max-w-7xl mx-auto ${
+          viewMode === 'grid' 
+            ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
+            : 'space-y-4'
+        }`}>
+          {filteredAndSortedCharacters.map((character) => (
             <Link
               key={character.id}
               href={`/chat/${character.id}`}
-              className="block group"
+              className={`block group ${viewMode === 'list' ? 'w-full' : ''}`}
             >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div className="relative w-full pt-[100%]">
+              <div className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 ${
+                viewMode === 'list' ? 'flex items-center' : ''
+              }`}>
+                <div className={`relative ${
+                  viewMode === 'list' 
+                    ? 'w-24 h-24 flex-shrink-0'
+                    : 'w-full pt-[100%]'
+                }`}>
                   <Image
                     src={character.image}
                     alt={character.name}
@@ -72,9 +100,13 @@ export default function Home() {
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
                 </div>
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold text-center">{character.name}</h2>
-                  <p className="text-sm text-gray-500 text-center mt-1">{character.job}</p>
+                <div className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+                  <h2 className={`text-lg font-semibold ${viewMode === 'list' ? 'text-left' : 'text-center'}`}>
+                    {character.name}
+                  </h2>
+                  <p className={`text-sm text-gray-500 ${viewMode === 'list' ? 'text-left mt-1' : 'text-center mt-1'}`}>
+                    {character.job}
+                  </p>
                 </div>
               </div>
             </Link>
